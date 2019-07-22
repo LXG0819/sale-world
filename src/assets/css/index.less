@@ -1,0 +1,107 @@
+/**
+ *
+ * 全局的样式
+ *
+ */
+
+
+  
+  
+  /* 文字提示框样式 */
+  .ant-tooltip-inner {
+    background-color: #fff;
+    color: rgba(0,0,0,0.65);
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.15);
+  }
+
+  .ant-tooltip-placement-bottom .ant-tooltip-arrow, .ant-tooltip-placement-bottomLeft .ant-tooltip-arrow, .ant-tooltip-placement-bottomRight .ant-tooltip-arrow {
+    top: 3px;
+    border-width: 0 5px 5px;
+    border-bottom-color: #fff;
+}
+
+/* 上传封面图样式 */
+.SouCoverPictureUpload .ant-upload-list-picture-card .ant-upload-list-item {
+  width: 144px;
+  height: 132px;
+  margin-right: 24px;
+  margin-bottom: 0;
+  padding: 0;
+  .ant-upload-list-item-info{
+    width: 130px;
+    height: 93px;
+    margin: 7px 7px 0 7px;
+  }
+  .ant-upload-list-item-actions{
+    opacity: 1;
+    position: relative;
+    height: 37px;
+    line-height: 37px;
+    width: 100%;  
+    top: none;
+    left: none;
+    background: #bfbfbf;
+  }
+}
+.clearfix .SouCoverPictureUpload .ant-upload{
+  width: 144px;
+  height: 132px;
+  position: relative;
+}
+.ant-upload-list-picture-card .ant-upload-list-item:hover .ant-upload-list-item-info:before{
+  z-index: -1;
+  opacity: 0;
+  display: none;
+}
+
+
+//
+.ant-modal-content{
+  width: 1026px;
+}
+.ant-modal-content .ant-modal-header{
+  opacity: 0.9;
+  padding: 0;
+  background: #F4F4F4;
+  border: 1px solid #D9D9D9;
+  .ant-modal-title{
+    color: #4A4A4A;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    
+    padding-left: 16px;
+  }
+}
+.ant-modal-content  .ant-modal-close{
+  span{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    .anticon{
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #9B9B9B;
+      width: 40px;
+      font-size: 20px;
+      height: 40px;
+      line-height: 40px;
+     
+
+
+    }
+  }
+}
+.ant-modal-content  .ant-modal-footer{
+  .ant-btn-primary{
+    background-image: linear-gradient(90deg, #7972F5 0%, #46C7FA 100%);
+    border-radius: 4px;
+    width: 104px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 16px;
+  }
+
+}
