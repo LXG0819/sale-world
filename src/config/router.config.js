@@ -140,17 +140,17 @@ export const asyncRouterMap = [
 
       // profile
       {
-        path: '/profile',
-        name: 'profile',
+        path: '/addressbook',
+        name: 'addressbook',
         component: RouteView,
-        redirect: '/profile/basic',
+        redirect: '/addressbook/management',
         meta: { title: '通讯录'/*  icon: 'profile', */, permission: [ 'profile' ] },
         children: [
           {
-            path: '/profile/basic',
-            name: 'ProfileBasic',
-            component: () => import('@/views/profile/basic/Index'),
-            meta: { title: '基础详情页', permission: [ 'profile' ] }
+            path: '/addressbook/management',
+            name: 'management',
+            component: () => import('@/views/profile/addressbook/management'),
+            meta: { title: '组织管理', permission: [ 'profile' ] }
           },
           {
             path: '/profile/advanced',
