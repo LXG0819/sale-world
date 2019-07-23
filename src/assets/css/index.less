@@ -56,9 +56,6 @@
 
 
 //
-.ant-modal-content{
-  width: 1026px;
-}
 .ant-modal-content .ant-modal-header{
   opacity: 0.9;
   padding: 0;
@@ -69,7 +66,6 @@
     font-size: 16px;
     height: 40px;
     line-height: 40px;
-    
     padding-left: 16px;
   }
 }
@@ -80,11 +76,11 @@
     position: relative;
     .anticon{
       position: absolute;
-      top: 0;
+      top: 5px;
       left: 0;
       color: #9B9B9B;
       width: 40px;
-      font-size: 20px;
+      font-size: 30px;
       height: 40px;
       line-height: 40px;
      
@@ -94,7 +90,7 @@
   }
 }
 .ant-modal-content  .ant-modal-footer{
-  .ant-btn-primary{
+  .ant-btn-primary,.ant-btn-default{
     background-image: linear-gradient(90deg, #7972F5 0%, #46C7FA 100%);
     border-radius: 4px;
     width: 104px;
@@ -102,6 +98,10 @@
     line-height: 40px;
     color: #fff;
     font-size: 16px;
+  }
+  .ant-btn-default{
+    background: #fff;
+    color:rgba(0,0,0,0.65);
   }
 
 }
@@ -112,4 +112,47 @@
   font-size: 20px;
   top: 35px;
   color: rgba(0,0,0,0.25);
+}
+
+//
+.ant-popover-inner .ant-popover-inner-content {
+  padding: 0;
+  .Tags_View_bottom{
+    width: 330px;
+    border-top: 1px solid rgba(0,0,0,0.09);
+    padding: 9px 19px 13px 18px;
+    overflow: hidden;
+    .add_Tags{
+        background: #F3F9FF;
+        border: 1px solid #9ECFFC;
+        border-radius: 4px;
+        height: 24px;
+        line-height: 24px;
+        width: 88px;
+        text-align: center;
+        color: #3A8EDC;
+    }
+    .cancel_Tags{
+      background: #FFFFFF;
+      border: 1px solid #D9D9D9;
+      border-radius: 4px;
+      height: 24px;
+      line-height: 24px;
+      width: 49px;
+      text-align: center;
+      margin-left: 10px;
+      color: rgba(0,0,0,0.65);
+  
+    }
+    .compile_Tags{
+      background: #1890FF;
+      border-radius: 4px;
+      margin-left: 10px;
+      height: 24px;
+      line-height: 24px;
+      width: 49px;
+      text-align: center;
+      color: #fff;
+    }
+  }
 }
