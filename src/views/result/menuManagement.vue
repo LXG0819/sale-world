@@ -1,18 +1,15 @@
 <template>
 <Page-view>
-<div class="source_main">
+<div class="menu_management">
     <div class="navigation_crumbs">
-      销傲天下<span>/</span><span>菜单管理</span>
+        销傲天下<span>/</span><span>菜单管理</span>
     </div>
-    <div class="screen_form"  :style="{ maxHeight: FormmaxHeight+'px'}" >
+    <div class="screen_form"  >
         <a-row>
-            <a-col :xs="{ span: 7, offset: 0 }" :lg="{ span: 7, offset: 0 }" :style="{ textAlign: Textalign}">
-                <div class="">
-                <span class="from_nameSpan">素材名称:</span> <a-input class="from_input" placeholder="请输入"/>
-                </div>
+            <a-col :xs="{ span: 7, offset: 0 }" :lg="{ span: 7, offset: 0 }">
+                <span class="from_nameSpan">菜单名称:</span> <a-input class="from_input" placeholder="请输入"/>
             </a-col>
-            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{display: actionDisplay, textAlign: Textalign}">
-                <div class="from_status"  >
+            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }">
                 <span class="from_nameSpan">状态:</span>
                 <a-dropdown>
                     <a-menu slot="overlay" @click="handleMenuClick">
@@ -20,61 +17,52 @@
                     <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
                     <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
                     </a-menu>
-                    <a-button style="margin-left: 8px" >
-                    <span> 请选择 </span><a-icon type="down" class="anticon" />
+                    <a-button style="margin-left: 8px" class="from_input">
+                    <span class="fl"> 请选择 </span><a-icon type="down" class="fr" />
                     </a-button>
                 </a-dropdown>
-                </div>
             </a-col>
-            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{ display: actionDisplay,textAlign: Textalign}">
-                <span class="from_nameSpan">素材标签:</span> <a-input class="from_input" placeholder="请输入"/>
-            </a-col>
-            <a-col :xs="{ span: 7, offset: 0 }" :lg="{ span: 7, offset: 0 }" :style="{display: actionDisplay, textAlign: Textalign}">
-                <span class="from_nameSpan">是否关联考试：</span> <a-input class="from_input" placeholder="请输入"/>
-            </a-col>
-            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{ textAlign: Textalign}">
-                <span class="from_nameSpan">创建时间:</span> <a-range-picker class="from_input" @change="onChange" />
-            </a-col>
-            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{ textAlign: Textalign}">
-                <div class="" :style="{  float: Textalign}">
+            <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }">
                 <a-button type="primary" class="fome_seach fl" >搜索</a-button>
-                <div class="fome_open fl" @click="seachOpen()">{{OpenCollapse?'收起':'展开'}}<a-icon :type="OpenCollapse? 'up':'down'" /></div>
-                </div>
+                <a-button type="primary" class="menu_Reset fl" >重置</a-button>
             </a-col>
         </a-row>
     </div>
     <div class="seach_Data">共搜索到4条数据</div>
     <div class="Add_delete">
-        <div class="delete_data fl"><span><a-icon type="delete" /></span> 批量删除</div>
+        <div class="add_data fl" @click="menuManagementadd()"><span><a-icon type="plus" /></span> 新增</div>
+        <div class="delete_data fl" @click="showDeleteConfirm"><span><a-icon type="delete" /></span> 批量删除</div>
+        
+    </div>
+    <div class="select_list">
+        <span><a-icon type="info-circle" /></span>已选择<span>4</span>项
     </div>
     <div class="goldenIdea_list">
         <a-row class="goldenIdea_list_title">
-            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 1, offset: 0}" class="title_stype"><span><a-checkbox @change="onChange"></a-checkbox></span></a-col>
-            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 0}"><span>编号</span></a-col>
-            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 5, offset: 0}" class="title_stype"><span>名称</span></a-col>
-            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 1, offset: 0}"><span>分类</span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 1, offset: 0}" class=""><span><a-checkbox @change="onChange"></a-checkbox></span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 0}"><span>菜单编号</span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 0}" class=""><span>菜单名称</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span>显示顺序</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span>上级菜单</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 1, offset: 1}"><span>状态</span></a-col>
-            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 1, offset: 1}"><span>阅读量</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 3, offset: 1}"><span>创建时间</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span>创建人</span></a-col>
-            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 3, offset: 1}"><span>操作</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 3, offset: 1}" class="title"><span>操作</span></a-col>
         </a-row>
         <a-row class="goldenIdea_list_cestion">
             <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 1, offset: 0}"><span><a-checkbox @change="onChange"></a-checkbox></span></a-col>
             <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 0}"><span>CH0000001</span></a-col>
-            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 5, offset: 0}"><span class="title ellipsis_hidden">文章最大标题文章最大标题标题标…</span></a-col>
-            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 1, offset: 0}"><span class="classify">分类</span></a-col>
-            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 1, offset: 1}"><span>启用</span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 0}"><span class="ellipsis_hidden">文章最大标题文章最大标题标题标…</span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span class="classify">分类</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span>启用</span></a-col>
             <a-col :xs="{ span: 1, offset: 0.5 }" :md="{ span: 1, offset: 1}"><span>2.0W</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 3, offset: 1}"><span class="ellipsis_hidden">2014-12-24  23:12:00</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 2, offset: 1}"><span class="">张三四</span></a-col>
             <a-col :xs="{ span: 2, offset: 0.5 }" :md="{ span: 3, offset: 1}">
                 <div class="goldenIdea_list_operation fl">
-                    <div class="superior fl"><a-icon type="to-top" /></div>
+                    <div class="blockUp fl">编辑</div>
                     <span class="fl">|</span>
-                    <div class="blockUp fl">停用</div>
-                    <span class="fl">|</span>
-                    <div class="delete fl">删除</div>
+                    <div class="delete fl" @click="showDeleteConfirm">删除</div>
                 </div>
             </a-col>
         </a-row>
@@ -116,7 +104,7 @@
 .fl{
   float: left;
 }
-.source_main{
+.menu_management{
   background: #fff;
   font-size: 14px;
   .seach_Data{
@@ -127,6 +115,25 @@
   .Add_delete{
     padding: 7px 24px 16px;
     overflow: hidden;
+    p{
+        font-size: 14px;
+        color: rgba(0,0,0,0.65);
+    }
+    .Model_title{
+        font-size: 16px;
+        color: rgba(0,0,0,0.85);
+    }
+    .add_data{
+      text-align: center;
+      width: 104px;
+      height: 40px;
+      font-size: 16px;
+      color: #FFFFFF;
+      line-height: 40px;
+      background-image: linear-gradient(-90deg, #7972F5 0%, #46C7FA 100%);
+      border-radius: 4px;
+      margin-right: 20px;
+    }
     .delete_data{
       text-align: center;
       width: 104px;
@@ -138,8 +145,22 @@
       color: #3A8EDC;
     }
   }
+  .select_list{
+    background: #E6F7FF;
+    border: 1px solid #91D5FF;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    margin:20px 24px ;
+    color: rgba(0,0,0,0.65);
+    padding: 0 16px;
+    span{
+        color: #1890FF;
+    }
+  }
+  
 }
-.source_main{
+.menu_management{
   .screen_form{
     overflow: hidden;
     padding: 24px;
@@ -157,41 +178,30 @@
       width: 224px;
       height: 32px;
     }
-    .from_status{
-      .ant-btn{
-        color: #BFBFBF;
-        text-align: left;
-        position: relative;
-        width: 224px;
-        height: 32px;
-        .anticon{
-          position: absolute;
-          top: 10px;
-          right: 15px;
-        }
-      }
-    }
     .fome_seach{
       background-image: linear-gradient(-90deg, #7972F5 0%, #46C7FA 100%);
       border-radius: 4px;
       font-size: 14px;
       color: #fff;
-      margin-left: 5px;
-    }
-    .fome_open{
-      margin-left: 16px;
-      line-height: 32px;
+      text-align: center;
       height: 32px;
-      font-size: 12px;
-      color: #3A8EDC;
-      .anticon {
-        margin-left: 6px;
-      }
+      line-height: 32px;
+      width: 74px;
+      margin-right: 20px;
+    }
+    .menu_Reset{
+        background: #FFFFFF;
+        height: 32px;
+        line-height: 32px;
+        width: 74px;
+        border: 1px solid #3A8EDC;
+        border-radius: 4px;
+        color: #3A8EDC;
     }
   }
 }
 //
-.source_main .goldenIdea_list{
+.menu_management .goldenIdea_list{
     overflow: hidden;
     padding: 0 24px;
     .goldenIdea_list_title{
@@ -201,14 +211,21 @@
         font-weight: 600;
         line-height: 48px;
         color: #333333;
-        .title_stype{
+        div{
             text-align: center;
+            .title_stype{
+                text-align: left;
+            }
         }
+        
     }
     .goldenIdea_list_cestion{
         height: 50px;
         border-bottom:solid 1px #e8e8e8;
         line-height: 50px;
+        div{
+            text-align: center;
+        }
         .ant-col-md-5 .title{
             color: #3A8EDC;
         }
@@ -259,10 +276,7 @@ export default {
     },
     data() {
         return {
-            FormmaxHeight:128,
-            OpenCollapse:false,
-            Textalign:'left',
-            actionDisplay : 'none',  //搜索
+            //删除
             pageSizeOptions: ['10', '20', '30', '40', '50'],
             current: 1,
             pageSize: 10,
@@ -277,20 +291,6 @@ export default {
     handleMenuClick(e) {
       console.log('click', e);
     },
-    //搜索展开
-    seachOpen(){
-      this.OpenCollapse=!this.OpenCollapse
-     
-      if(this.OpenCollapse==true){
-        this.actionDisplay ='block'
-        this.FormmaxHeight =160
-        this.Textalign = 'right'
-      }else{
-        this.actionDisplay ='none'
-        this.FormmaxHeight =128
-        this.Textalign = 'left'
-      }
-    },
     //选择框
     onChange(date, dateString) {
       console.log(date, dateString)
@@ -302,7 +302,32 @@ export default {
     },
     onSoucePagination(pageNumber){
        console.log('Page: ', pageNumber)
-    }
+    },
+    //新增
+    menuManagementadd(){
+        this.$router.push({
+            path: '/result/addManagement',
+			query: {
+			
+			}
+        })
+    },
+    //删除
+    showDeleteConfirm() {
+      this.$confirm({
+        title: '确认要删除这条菜单吗？',
+        content: '删除这条菜单操作会在移动端删除这个菜单。',
+        okText: '确定',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk() {
+          console.log('OK');
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
+    },
   }
 }
 </script>

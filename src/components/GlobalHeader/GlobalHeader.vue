@@ -6,7 +6,8 @@
           <div class="header_index_wide">
             <div class="header_index_left">
               <logo class="top-nav-header" :show-title="device !== 'mobile'"/>
-              <s-menu v-if="device !== 'mobile'" mode="horizontal" class="Sment_list" :menu="menus" :theme="theme" />
+              <s-menu v-if="device !== 'mobile'" mode="horizontal" class="Sment_list" :menu="menus" :theme="theme" 
+              @click="ontitleclick('1')"/>
             </div>
             <user-menu class="header_index_right"></user-menu>
           </div>
@@ -137,6 +138,9 @@ export default {
   },
   beforeDestroy () {
     document.body.removeEventListener('scroll', this.handleScroll, true)
+  },
+  ontitleclick(index){
+      console.log(index)
   }
 }
 </script>

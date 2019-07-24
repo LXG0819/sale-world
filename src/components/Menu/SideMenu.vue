@@ -63,7 +63,9 @@ export default {
   methods: {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
-    }
+      console.log(obj)
+    },
+    
   }
 }
 </script>

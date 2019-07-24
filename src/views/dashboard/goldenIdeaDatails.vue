@@ -132,11 +132,13 @@ export default {
     components:{
         PageView
     },
-  data(){
+    data(){
+        return{
+            
+        }
+    },
+    methods:{
 
-  },
-  methods:{
-
-  },
+    },
 }
 </script>

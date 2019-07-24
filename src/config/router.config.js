@@ -19,13 +19,13 @@ export const asyncRouterMap = [
         redirect: '/list/Source-list',
         meta: { title: '素材管理'/* , icon: 'table' */, permission: [ 'table' ] },
         children: [
-          {
+          /* {
             path: '/list/table-list/:pageNo([1-9]\\d*)?',
             name: 'TableListWrapper',
-            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            hideChildrenInMenu: true,
             component: () => import('@/views/list/TableList'),
             meta: { title: '查询表格', keepAlive: true, permission: [ 'table' ] }
-          },
+          }, */
           {
             path: '/list/Source-list',
             name: 'SourceList',
@@ -44,8 +44,8 @@ export const asyncRouterMap = [
             name: 'NewaddList',
             component: () => import('@/views/list/NewaddList'),
             meta: { title: '新增素材', keepAlive: true, permission: [ 'table' ] }
-          },
-          {
+          }
+          /* {
             path: '/list/search',
             name: 'SearchList',
             component: () => import('@/views/list/search/SearchLayout'),
@@ -71,7 +71,7 @@ export const asyncRouterMap = [
                 meta: { title: '搜索列表（应用）', permission: [ 'table' ] }
               }
             ]
-          }
+          } */
         ]
       },
 
@@ -166,20 +166,20 @@ export const asyncRouterMap = [
         path: '/result',
         name: 'result',
         component: PageView,
-        redirect: '/result/success',
+        redirect: '/result/menuManagement',
         meta: { title: '移动端菜单管理'/* , icon: 'check-circle-o' */, permission: [ 'result' ] },
         children: [
           {
-            path: '/result/success',
-            name: 'ResultSuccess',
-            component: () => import(/* webpackChunkName: "result" */ '@/views/result/Success'),
-            meta: { title: '成功', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
+            path: '/result/menuManagement',
+            name: 'menuManagement',
+            component: () => import(/* webpackChunkName: "result" */ '@/views/result/menuManagement'),
+            meta: { title: '菜单管理', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
           },
           {
-            path: '/result/fail',
+            path: '/result/addManagement',
             name: 'ResultFail',
-            component: () => import(/* webpackChunkName: "result" */ '@/views/result/Error'),
-            meta: { title: '失败', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
+            component: () => import(/* webpackChunkName: "result" */ '@/views/result/addManagement'),
+            meta: { title: '新增菜单', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
           }
         ]
       }
