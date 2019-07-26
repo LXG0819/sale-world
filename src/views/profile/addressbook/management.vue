@@ -398,6 +398,8 @@ export default {
     },
     data(){
         return{
+            formLayout: 'horizontal',
+            form: this.$form.createForm(this),
             organizationlistData:1,//组织标签
             current: ['mail'],
             openKeys: ['sub1'],

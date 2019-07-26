@@ -190,8 +190,13 @@ export default {
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           loginParams.password = md5(values.password)
+          
           Login(loginParams)
-            .then((res) => this.loginSuccess(res))
+            .then((res) => {
+              console.log(loginParams)
+              console.log(res)
+              this.loginSuccess(res)
+              })
             .catch(err => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false

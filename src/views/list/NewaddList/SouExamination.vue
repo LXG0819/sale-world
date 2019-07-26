@@ -1,8 +1,9 @@
 <template>
 <div class="Newadd_source">
+    
   <a-form :form="form" @submit="SourceForm"  >
     <a-form-item  label="关联试卷"  :labelCol="{ md: {span: 3}, sm: {span: 3} }">
-      <a-radio-group v-decorator="['SouExamination']" :defaultValue="9" name="SouExamination" @change="onSouExamination">
+      <a-radio-group v-decorator="['SouExamination']" name="SouExamination" @change="onSouExamination">
         <a-radio :value="9">不关联</a-radio>
         <a-radio :value="1">关联试卷</a-radio>
         <a-button type="primary" @click="() => setModal1Visible(true)" class="Examination_button fr" :style="{display: ActionDisaplay}">
@@ -26,26 +27,25 @@
     </a-form-item>
     <a-form-item label="显示分数" :labelCol="{md: {span:3}, sm: {span: 3}}"
             :wrapperCol="{md: {span: 10}, sm: {span: 11} }" :style="{display: ActionDisaplay}">
-      <a-input name="SouDisplayScore"
-        v-decorator="[ 'SouDisplayScore',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
+      <a-input name="SouShowmark"
+        v-decorator="[ 'SouShowmark',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
         placeholder="请输入"
       />
     </a-form-item>
     <div id="components-modal-demo-position">
         <a-modal
         title="选择试卷"
-        style="width: 1026px; top:20px;"
-        :bodyStyle="{ width: 1026 + 'px' }"
+        width='1026px'
         :visible="modal1Visible"
         @ok="() => setModal1Visible(false)"
         @cancel="() => setModal1Visible(false)"
         >
             <a-row>
-                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{display: actionDisplay, textAlign: Textalign}">
+                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" >
                     <div class="from_status"  >
                     <span class="from_nameSpan">试卷类型:</span>
                     <a-dropdown>
-                        <a-menu slot="overlay" @click="handleMenuClick">
+                        <a-menu slot="overlay" @click="PaperTypeClick">
                         <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
                         <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
                         <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
@@ -56,11 +56,11 @@
                     </a-dropdown>
                     </div>
                 </a-col>
-                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{display: actionDisplay, textAlign: Textalign}">
+                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" >
                     <div class="from_status"  >
                     <span class="from_nameSpan">试卷名称:</span>
                     <a-dropdown>
-                        <a-menu slot="overlay" @click="handleMenuClick">
+                        <a-menu slot="overlay" @click="PaperNameClick">
                         <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
                         <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
                         <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
@@ -80,11 +80,10 @@
                     :open="endOpen"
                     @openChange="handleEndOpenChange"
                     />
-                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{ textAlign: Textalign}">
-                    <div class="" :style="{  float: Textalign}">
+                <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" >
+                    
                     <a-button type="primary fl" class="fome_seach" >搜索</a-button>
-                    <div class="fome_open fl" @click="seachOpen()">{{OpenCollapse?'收起':'展开'}}<a-icon :type="OpenCollapse? 'up':'down'" /></div>
-                    </div>
+                     <a-button type="primary fl" class="fome_Reset" >重置</a-button>
                 </a-col>
             </a-row>
         </a-modal>
@@ -122,14 +121,13 @@
 
 <script>
 
-import form from 'ant-design-vue/lib/date-picker';  // 加载 JS
-import 'ant-design-vue/lib/date-picker/style/css';        // 加载 CSS
-// import 'ant-design-vue/lib/date-picker/style';         // 加载 LESS
 
 
 export default {
     data(){
         return{
+            formLayout: 'horizontal',
+            form: this.$form.createForm(this),
             ActionDisaplay:'none',//是否关联考试
             modal1Visible: false,
             startValue: null,
@@ -164,6 +162,13 @@ export default {
         //选择试卷
         showConfirm() {
             
+        },
+        //状态下拉框
+        PaperTypeClick(e) {
+           console.log('click', e);
+        },
+        PaperNameClick(e){
+            console.log('click', e);
         },
         //
         setModal1Visible(modal1Visible) {

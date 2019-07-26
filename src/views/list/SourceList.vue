@@ -1,5 +1,8 @@
 <template>
 <div class="source_main">
+  <div class="navigation_crumbs">
+      素材列表<span>/</span><span>素材管理</span>
+  </div>
   <div class="screen_form"  :style="{ maxHeight: FormmaxHeight+'px'}" >
     <a-row>
       <a-col :xs="{ span: 7, offset: 0 }" :lg="{ span: 7, offset: 0 }" :style="{ textAlign: Textalign}">
@@ -44,69 +47,58 @@
     <div class="add_data fl" @click="NewaddSource()"><span><a-icon type="plus" /></span> 新增</div>
     <div class="delete_data fl"><span><a-icon type="delete" /></span> 批量删除</div>
   </div>
-  <div class="source_list_data">
-    <div class="souce_seachList_data">
-      <div class="souce_seachContent" >
-        <div class="souce_title ">
-          <ul class="">
-            <li><a-checkbox @change="onChange"></a-checkbox></li>
-            <li>素材编号</li>
-            <li>素材名称</li>
-            <li>素材标签</li>
-            <li>创建时间</li>
-            <li>创建人</li>
-            <li>操作</li>
-          </ul>
-        </div>
-        <div class="souce_seachList" v-for="(item,index) in 10" :key="index">
-          <ul>
-            <li>
-              <div class="souce_checkbox fl"><a-checkbox @change="onChange"></a-checkbox></div>
-              <div class="souce_id fl">CH0000001</div>
-              <div class="souce_name  fl"  >
-                <a-tooltip class="ellipsis_hidden" placement="bottomRight" title="Prompt Text" overlayClassName ="ant-btn-default">
-                  <a-button>文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题</a-button>
-                </a-tooltip>
-              </div>
-              <div class="souce_Label ellipsis_hidden fl">
-                <div class="label_one">标签1</div>
-                <div class="label_two">标签2</div>
-                <div class="label_Three">标签3</div>
-              </div>
-              <div class="souce_timer ellipsis_hidden fl">2014-12-24  23:12:00</div>
-              <div class="souce_Founder ellipsis_hidden fl">张三四</div>
+  <a-row class="source_list_title">
+    <a-col :xs="{ span: 1, offset: 0.5 }" :lg="{ span: 1 ,offset: 0}" class="title_textAlign" ><span><a-checkbox @change="onChange"></a-checkbox></span></a-col>
+    <a-col :xs="{ span: 1, offset: 0.5 }" :lg="{ span: 2 ,offset: 1}"><span>素材编号</span></a-col>
+    <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 5 ,offset: 1}"><span>素材名称</span></a-col>
+    <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}"><span>素材标签</span></a-col>
+    <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}"><span>创建时间</span></a-col>
+    <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 1 ,offset: 1}"><span>创建人</span></a-col>
+    <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}"><span>操作</span></a-col>
+  </a-row>
+  <div class="source_list_ceation">
+    <a-row v-for="(item,index) in 10" :key="index">
+            <a-col :xs="{ span: 1, offset: 0.5 }" :lg="{ span: 1 ,offset: 0}" class="title_textAlign" ><span><a-checkbox @change="onChange"></a-checkbox></span></a-col>
+            <a-col :xs="{ span: 1, offset: 0.5 }" :lg="{ span: 2 ,offset: 1}"><span>CH0000001</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 5 ,offset: 1}">
+              <a-popover placement="bottomRight" overlayClassName="title_tooltip">
+                <template slot="content"  >
+                  文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题
+                </template>
+                <div class="ellipsis_hidden row_name">
+                  文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题文章最大标题
+                </div>
+              </a-popover>
+            </a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}">
+              
+              <a-popover placement="bottomRight" overlayClassName="">
+                <template slot="content">
+                    <div class="souce_Label ellipsis_hidden fl">
+                      <div class="label_one">标签1</div>
+                      <div class="label_two">标签2</div>
+                      <div class="label_Three">标签3</div>
+                    </div>
+                </template>
+                <div class="souce_Label ellipsis_hidden fl">
+                  <div class="label_one">标签1</div>
+                  <div class="label_two">标签2</div>
+                  <div class="label_Three">标签3</div>
+                </div>
+              </a-popover>
+            </a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}"><span>2014-12-24  23:12:00</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 1 ,offset: 1}"><span>张三四</span></a-col>
+            <a-col :xs="{ span: 2, offset: 0.5 }" :lg="{ span: 3 ,offset: 1}">
               <div class="souce_operation fl">
-                <div class="see ">查看</div>
+                <div class="see fl">查看</div>
                 <span class="fl">|</span>
-                <div class="edit">编辑</div>
-                <span class="fl">|</span>
-                <div class="delete">删除</div>
+                <div class="edit fl">编辑</div>
+                <span class="fl ">|</span>
+                <div class="delete fl">删除</div>
               </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="souce_Pagination">
-      <a-pagination
-        :pageSizeOptions="pageSizeOptions"
-        :total="total"
-        showSizeChanger
-        :pageSize="pageSize"
-        v-model="current"
-        size="16px"
-        showQuickJumper 
-        :defaultCurrent="2" 
-        @change="onSoucePagination" 
-        @showSizeChange="onShowSizeChange"
-      >
-      <a-pagination/>
-        <template slot='buildOptionText' slot-scope='props'>
-          <span v-if="props.value!=='50'">{{props.value}}条/页</span>
-          <span v-if="props.value==='50'">全部</span>
-        </template>
-      </a-pagination>
-    </div>
+            </a-col>
+    </a-row>
   </div>
 </div>
 </template>
@@ -115,7 +107,7 @@
 
 .ellipsis_hidden{
   overflow: hidden;
-  word-break: normal;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 .fl{
@@ -123,6 +115,10 @@
 }
 .source_main{
   background: #fff;
+  min-width: 1200px;
+  font-size: 14px;
+  width: 75px;
+  color: rgba(0,0,0,0.65);
   .seach_Data{
     margin: 15px 24px 0;
     font-size: 12px;
@@ -138,7 +134,7 @@
       font-size: 16px;
       color: #FFFFFF;
       line-height: 40px;
-      background-image: linear-gradient(-90deg, #7972F5 0%, #46C7FA 100%);
+      background-image: linear-gradient(90deg, #7972F5 0%, #46C7FA 100%);
       border-radius: 4px;
     }
     .delete_data{
@@ -153,155 +149,83 @@
       color: #3A8EDC;
     }
   }
-  .source_list_data{
-    overflow: hidden;
-    .souce_seachList_data{
-      margin: 0 24px;
-      overflow-y: auto;
-      white-space: nowrap;
-      .souce_seachContent{
-        min-width: 1152px;
-        .souce_title{
-          background: #EBECF0;
-          ul{
-            white-space: nowrap;
-            overflow: hidden;
-            padding: 0;
-            height: 48px;
-            margin: 0;
-            li{
-              float: left;
-              font-size: 14px;
-              list-style: none;
-              color: #333333;
-              line-height: 48px;
-            }
-            li:nth-child(1){margin-left: 24px;}
-            li:nth-child(2){margin-left: 31px;}
-            li:nth-child(3){margin-left: 142px;}
-            li:nth-child(4){margin-left: 127px;}
-            li:nth-child(5){margin-left: 135px;}
-            li:nth-child(6){margin-left: 152px;} 
-            li:nth-child(7){margin-left: 125px;} 
-          }
-        }
-        .souce_seachList{
-          ul{
-            white-space: nowrap;
-            overflow: hidden;
-            padding: 0;
-            margin: 0;
-            li{
-              float: left;
-              height: 50px;
-              width: 100%;
-              line-height: 50px;
-              border-bottom: 1px solid #e8e8e8;
-              .souce_checkbox {
-                margin-left: 24px;
-                .ant-checkbox{
-                  border: 1px solid rgba(0,0,0,0.15);
-                  border-radius: 2px;
-                  width: 16px;
-                  height: 16px;
-                }
-              }
-              .souce_id{
-                font-size: 14px;
-                width: 75px;
-                color: rgba(0,0,0,0.65);
-                margin-left: 21px;
-              }
-              .souce_name{
-                width: 262px;
-                font-size: 14px;
-                color: #3A8EDC;
-                margin-left: 30px;
-                .ant-btn-default{
-                  width: 100%;
-                  font-size: 14px;
-                  color: #3A8EDC;
-                  border: none;
-                }
-              }
-              .souce_Label{
-                width: 142px;
-                margin-left: 24px;
-                height: 100%;
-                div{
-                  border-radius: 4px;
-                  float: left;
-                  margin: 15px 0;
-                  margin-right: 8px;
-                  height: 19px;
-                  padding: 0 2px;
-                  line-height: 19px;
-                  text-align: center;
-                  font-size: 11px;
-                }
-                .label_one{
-                  background: #FFF4F9;
-                  border: 1px solid #FFA7CE;
-                  color: #EC77AB;
-                }
-                .label_two{
-                  background: #FCFCFF;
-                  border: 1px solid #B2ADFF;
-                  color: #7972F5;
-                }
-                .label_Three{
-                  color: #3A8EDC;
-                  background: #F3F9FF;
-                  border: 1px solid #9ECFFC;
-                }
-              }
-              .souce_timer{
-                width: 136px;
-                font-size: 14px;
-                color: rgba(0,0,0,0.65);
-                margin-left: 49px;
-              }
-              .souce_Founder{
-                font-size: 14px;
-                width: 68px;
-                color: rgba(0,0,0,0.65);
-                margin-left: 72px;
-              }
-              .souce_operation{
-                margin-left: 46px;            
-                div{
-                  float: left;
-                  padding: 0 8px;
-                  line-height: 22px;
-                  height: 22px;
-                  font-size: 13px;
-                  margin: 15px 0;
-                }
-                .see,.edit{
-                  color: #3A8EDC;
-                }
-                .delete{
-                  color: #F44848;
-                }
-                span{
-                  color: rgba(0,0,0,0.09);
-                  height: 14px;
-                }
-              }
-            }
-          }
-        }
-      }
-      
+}
+.source_list_title{
+  overflow: hidden;
+  margin: 0 24px;
+  background: #EBECF0;
+  height: 48px;
+  height: 50px;
+  font-weight: 600;
+  line-height: 50px; 
+  .title_textAlign{
+    text-align: center;
+  }
+}
+.source_list_ceation{
+  padding: 0 24px;
+  .ant-row{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #e8e8e8;
+    .title_textAlign{
+      text-align: center;
     }
-    
-    .souce_Pagination{
-      float: right;
-      margin: 24px 24px 24px 24px;
-      
+    div .row_name{
+        width: 90%;
+        color: #3A8EDC;
+    }
+    .souce_operation{
+      .see,.edit{
+        color: #3A8EDC;
+        margin: 0 8px ;
+      }
+      .delete{
+        color: #F44848;
+        margin: 0 8px ;
+      }
+    }
+  }
+  .souce_Label{
+    width: 142px;
+    height: 100%;
+    div{
+      border-radius: 4px;
+      float: left;
+      margin: 15px 0;
+      margin-right: 8px;
+      height: 19px;
+      padding: 0 2px;
+      line-height: 19px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .label_one{
+      background: #FFF4F9;
+      border: 1px solid #FFA7CE;
+      color: #EC77AB;
+    }
+    .label_two{
+      background: #FCFCFF;
+      border: 1px solid #B2ADFF;
+      color: #7972F5;
+    }
+    .label_Three{
+      color: #3A8EDC;
+      background: #F3F9FF;
+      border: 1px solid #9ECFFC;
     }
   }
 }
+.title_tooltip{
+  width: 330px;
+  padding: 15px 15px;
+}
+.souce_Pagination{
+  float: right;
+  margin: 24px 24px 24px 24px;
+      
+  }
 .source_main{
   .screen_form{
     overflow: hidden;
@@ -354,34 +278,17 @@
   }
 }
 
-
-//
-.ant-pagination{
-        .ant-pagination-item{
-          background: red;
-          font-size: 12px;
-          color: #4A4A4A;
-        }
-        .ant-pagination-item.ant-pagination-item-active{
-          width: 22px;
-          height: 22px;
-          background: #3A8EDC;
-          border-radius: 2px;
-        }
-}
-
 </style>
 
 
 <script>
 
-import DatePicker from 'ant-design-vue/lib/date-picker';  // 加载 JS
-import 'ant-design-vue/lib/date-picker/style/css';        // 加载 CSS
-// import 'ant-design-vue/lib/date-picker/style';         // 加载 LESS
 
 export default {
   data() {
       return {
+        formLayout: 'horizontal',
+        form: this.$form.createForm(this),
         FormmaxHeight:128,
         OpenCollapse:false,
         Textalign:'left',

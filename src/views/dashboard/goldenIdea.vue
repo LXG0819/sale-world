@@ -2,7 +2,7 @@
 <Page-view>
 <div class="source_main">
     <div class="navigation_crumbs">
-      销傲天下<span>/</span><span>菜单管理</span>
+      金点子管理<span>/</span><span>金点子列表</span>
     </div>
     <div class="screen_form"  :style="{ maxHeight: FormmaxHeight+'px'}" >
         <a-row>
@@ -252,6 +252,8 @@
 <script>
 
 import { PageView } from '@/layouts'
+import { goldIdeaPost } from '../../api/DocumentsPost'
+
 
 export default {
     components:{
@@ -268,41 +270,55 @@ export default {
             pageSize: 10,
             total: 50,
         }
-        },
+    },
     methods: {
-     
-    },
-  methods: {
-    //状态下拉框
-    handleMenuClick(e) {
-      console.log('click', e);
-    },
-    //搜索展开
-    seachOpen(){
-      this.OpenCollapse=!this.OpenCollapse
-     
-      if(this.OpenCollapse==true){
-        this.actionDisplay ='block'
-        this.FormmaxHeight =160
-        this.Textalign = 'right'
-      }else{
-        this.actionDisplay ='none'
-        this.FormmaxHeight =128
-        this.Textalign = 'left'
-      }
-    },
-    //选择框
-    onChange(date, dateString) {
-      console.log(date, dateString)
-     }, 
+      //状态下拉框
+      handleMenuClick(e) {
+        console.log('click', e);
+      },
+      //搜索展开
+      seachOpen(){
+        this.OpenCollapse=!this.OpenCollapse
+      
+        if(this.OpenCollapse==true){
+          this.actionDisplay ='block'
+          this.FormmaxHeight =160
+          this.Textalign = 'right'
+        }else{
+          this.actionDisplay ='none'
+          this.FormmaxHeight =128
+          this.Textalign = 'left'
+        }
+      },
+      //选择框
+      onChange(date, dateString) {
+        console.log(date, dateString)
+      }, 
 
-    //分页
-    onShowSizeChange(current, pageSize) {
-        this.pageSize = pageSize
+      //分页
+      onShowSizeChange(current, pageSize) {
+          this.pageSize = pageSize
+      },
+      onSoucePagination(pageNumber){
+        console.log('Page: ', pageNumber)
+      },
+      //请求金点子列表
+      goldIdeaList(){
+            Login(param).then((res)=>{
+                if(res.code == 0){
+                        console.log(res.result)
+                        
+                }else{
+                      this.$message.error(res.mag); 
+                }
+            }).catch((err)=>{
+
+            })
+      }
+      
     },
-    onSoucePagination(pageNumber){
-       console.log('Page: ', pageNumber)
+    mounted(){
+      this.goldIdeaList()
     }
-  }
 }
 </script>

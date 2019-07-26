@@ -42,7 +42,7 @@
       />
 
       <!-- layout content ------布局内容-->
-      <a-layout-content :style="{ height: '100%', margin: '24px 24px 0', paddingTop: fixedHeader ? '36px' : '0' }">
+      <a-layout-content :style="{ height: '100%', margin: '84px 24px 0', paddingTop: fixedHeader ? '0' : '0' }">
         <multi-tab v-if="multiTab"></multi-tab>
         <transition name="page-transition">
           <route-view />

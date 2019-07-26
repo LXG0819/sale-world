@@ -1,5 +1,8 @@
 <template>
 <div class="Newadd_source">
+  <div class="navigation_crumbs">
+      素材列表<span>/</span><span>新增素材</span>
+    </div>
   <a-form :form="form" @submit="SourceForm"  >
     <a-form-item label="素材编号" :labelCol="{md: {span:3}, sm: {span: 3}}"
             :wrapperCol="{md: {span: 10}, sm: {span: 11} }"  >
@@ -10,8 +13,8 @@
     </a-form-item>
     <a-form-item label="素材名称" :labelCol="{md: {span:3}, sm: {span: 3}}"
             :wrapperCol="{md: {span: 10}, sm: {span: 11} }">
-      <a-input name="SouNumbering"
-        v-decorator="[ 'SouNumbering',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
+      <a-input name="SouName"
+        v-decorator="[ 'SouName',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
         placeholder="请输入"
       />
     </a-form-item>
@@ -31,11 +34,11 @@
     </a-form-item>
     <a-form-item label="标签" :labelCol="{ md: {span: 3}, sm: {span: 3} }" :wrapperCol="{ md: {span: 19}, sm: {span: 19} }" >
       <a-select name="SouLabel" v-decorator="[ 'SouLabel', {rules: [{ required: true, message: 'Please select your gender!' }] } ]"
-        placeholder="请选择" @change="SouLabel">
+        placeholder="请选择" @change="SouLabelClick(value)">
        <!--  <a-select-option value="search">
           <a-input-search placeholder="input search text" @search="onSouLabelSearch"/>
         </a-select-option> -->
-        <a-select-option value="female">
+        <a-select-option value="femal">
           female
         </a-select-option>
         <a-select-option value="female">
@@ -45,42 +48,15 @@
     </a-form-item>
     <a-form-item  label="素材设置"  :labelCol="{ md: {span: 3}, sm: {span: 3} }">
       <a-radio-group v-decorator="['SouSeeting']" name="SouSeeting">
-        <a-radio :value="99">无</a-radio>
+        <a-radio value="99">无</a-radio>
         <a-radio value="a">置顶</a-radio>
         <a-radio value="b">精华</a-radio>
       </a-radio-group>
     </a-form-item>
-    <!-- <a-form-item  label="关联试卷"  :labelCol="{ md: {span: 3}, sm: {span: 3} }">
-      <a-radio-group v-decorator="['SouExamination']" :defaultValue="9" name="SouExamination" @change="onSouExamination">
-        <a-radio :value="9">不关联</a-radio>
-        <a-radio :value="1">关联试卷</a-radio>
-      </a-radio-group>
-    </a-form-item>
-    <a-form-item label="可靠次数" :labelCol="{md: {span:3}, sm: {span: 3}}"
-            :wrapperCol="{md: {span: 10}, sm: {span: 11} }" :style="{display: ActionDisaplay}">
-      <a-input name="SouReliableNumber"
-        v-decorator="[ 'SouReliableNumber',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
-        placeholder="请输入"
-      />
-    </a-form-item>
-    <a-form-item label="及格分数" :labelCol="{md: {span:3}, sm: {span: 3}}"
-            :wrapperCol="{md: {span: 10}, sm: {span: 11} }" :style="{display: ActionDisaplay}">
-      <a-input name="SouPassScore"
-        v-decorator="[ 'SouPassScore',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
-        placeholder="请输入"
-      />
-    </a-form-item>
-    <a-form-item label="显示分数" :labelCol="{md: {span:3}, sm: {span: 3}}"
-            :wrapperCol="{md: {span: 10}, sm: {span: 11} }" :style="{display: ActionDisaplay}">
-      <a-input name="SouDisplayScore"
-        v-decorator="[ 'SouDisplayScore',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
-        placeholder="请输入"
-      />
-    </a-form-item> -->
     <sou-examination></sou-examination>
     <a-form-item label="封面图" :labelCol="{md: {span:3}, sm: {span: 3}}" name="SouCoverPicture"
             :wrapperCol="{md: {span: 10}, sm: {span: 11} }">
-      <div class="clearfix">
+        <div class="clearfix">
           <a-modal :visible="previewVisible" :footer="null" @cancel="SouCoverPicture" class="SouCoverPictureImg">
             <img alt="example" style="width: 100%" :src="previewImage" />
           </a-modal>
@@ -89,10 +65,11 @@
             action="##" 
             listType="picture-card"
             :fileList="fileList"
+            @customRequest="customRequestClick"
             @preview="SouCoverPicturePreview"
             @change="SouCoverPictureChange"
           >
-          <div class="source_click" @click="onUploadvideo" ></div>
+          <div class="source_click"></div>
             <div v-if="fileList.length < 3">
               <a-icon type="plus"  class="upload_icon"/>
               <div class="ant-upload-text">上传图片</div>
@@ -117,44 +94,35 @@
       />
     </a-form-item>
     <a-form-item  label="素材设置"  :labelCol="{ md: {span: 3}, sm: {span: 3} }" :wrapperCol="{ md: {span: 19}, sm: {span: 19} }">
-      <a-radio-group v-decorator="['SouUploadSeeting']" defaultValue="a" name="SouUploadSeeting" @change="onSouUploadSeeting">
-        <a-radio value="a" >图文</a-radio>
-        <a-radio value="b">文字</a-radio>
-        <a-radio value="c">视频</a-radio>
+      <a-radio-group v-decorator="['SouUploadSeeting']"  name="SouUploadSeeting" @change="onSouUploadSeeting">
+        <a-radio value="z">图文</a-radio>
+        <a-radio value="x" >文字</a-radio>
+        <a-radio value="c" >视频</a-radio>
       </a-radio-group>
-      <a-textarea name="SouGraphic" :rows="8" v-show=" SouUploadSeetingDisplay == 'a'"
-        v-decorator="[ 'SouGraphic',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
-        placeholder="图文样式"
-      />
-      <a-textarea name="SouText" :rows="8" v-show=" SouUploadSeetingDisplay == 'b'"
-        v-decorator="[ 'SouText',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
-        placeholder="文字样式"
-      />
-      
-      <a-upload
-          name="avatar"
-          listType="picture-card"
-          class="avatar-uploader"
-          :showUploadList="false"
-          action="##"
-          :beforeUpload="beforeUpload"
-          @change="Uploadvideo"
-          v-show=" SouUploadSeetingDisplay == 'c'"
-        >
-          <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
-          <div v-else>
-              <a-icon :type="loading ? 'loading' : 'plus'" />
-              <div class="ant-upload-text">Upload</div>
-          </div>
+      <a-textarea name="SouGraphic" :rows="8" v-show="UploadDATA == 'z'"
+         v-decorator="[ 'SouGraphic',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
+         placeholder="图文样式"/>
+      <a-textarea name="SouText" :rows="8" v-show="UploadDATA == 'x'"
+         v-decorator="[ 'SouText',{rules: [{ required: true, message: 'Please input your note!' }] } ]"
+         placeholder="文字样式"/>
+         
+        <a-upload name="avatar" listType="picture-card" class="avatar-uploader" :showUploadList="false" action="" 
+            :beforeUpload="beforeUpload" @change="Uploadvideo"  >
+            <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+            <div v-else>
+                <a-icon :type="loading ? 'loading' : 'plus'" />
+                <div class="ant-upload-text">Upload</div>
+            </div>
         </a-upload>
-    </a-form-item>
-    <a-form-item
-      :wrapper-col="{ span: 12, offset: 5 }">
-      <a-button type="primary" html-type="submit">
-        Submit
-      </a-button>
+        
+        
     </a-form-item>
   </a-form>
+  <div class="footer_botton">
+    <a-button type="primary" class="botton">预览</a-button>
+    <a-button type="primary" class="botton">保存并推送</a-button>
+    <a-button type="primary" class="botton">保存</a-button>
+  </div>
 </div>
 </template>
 <style lang="less" scoped>
@@ -179,24 +147,29 @@
     }
     
   }
-.source_click{
-      width: 144px;
-      height: 100%;
-      z-index: 99;
-      top: 0;
-      left: 0;
-      position: absolute;
-      background: red;
-    }
+.footer_botton{
+  padding: 20px 60px;
+  color: #FFFFFF;
+  font-size: 16px;
+  overflow: hidden;
+  .botton{
+    width: 104px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-image: linear-gradient(90deg, #7972F5 0%, #46C7FA 100%);
+    border-radius: 4px;
+    margin-left: 22px;
+    float: right;
+  }
+  
+}
 </style>
 
 
 
 <script>
 
-import DatePicker from 'ant-design-vue/lib/date-picker';  // 加载 JS
-import 'ant-design-vue/lib/date-picker/style/css';        // 加载 CSS
-// import 'ant-design-vue/lib/date-picker/style';         // 加载 LESS
 
 import SouExamination from './NewaddList/SouExamination'  //关联试卷
 
@@ -216,9 +189,11 @@ export default {
   },
   data () {
     return {
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this),
       previewVisible: false,//上传
       previewImage: '',
-      SouUploadSeetingDisplay:'a',//上传样式
+      UploadDATA:'z',//上传样式
       fileList: [{
         uid: '-1',
         name: 'xxx.png',
@@ -241,15 +216,11 @@ export default {
       });
     },
     //标签
-    SouLabel (value) {
+    SouLabelClick (value) {
       console.log(value);
       this.form.setFieldsValue({
         note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
       });
-    },
-    //标签搜索
-    onSouLabelSearch (value) {
-      console.log(value)
     },
     
     //上传封面图
@@ -265,14 +236,17 @@ export default {
       this.fileList = fileList
       console.log(fileList)
     },
+    customRequestClick(){
+      console.log('123')
+    },
     
     //上传素材样式
     onSouUploadSeeting(e) {
       console.log('radio checked', e.target.value)
-        this.SouUploadSeetingDisplay =e.target.value
+        this.UploadDATA =e.target.value
     },
     //上传视频
-    Uploadvideo (info) {
+    Uploadvideo(info) {
       if (info.file.status === 'uploading') {
         this.loading = true
         return
@@ -296,9 +270,7 @@ export default {
       }
       return isJPG && isLt2M
     },
-    onUploadvideo(){
-      console.log("点击率")
-    }
+
   
     
   }
