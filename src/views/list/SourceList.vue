@@ -36,7 +36,7 @@
       </a-col>
       <a-col :xs="{ span: 7, offset: 1 }" :lg="{ span: 7, offset: 1 }" :style="{ textAlign: Textalign}">
         <div class="" :style="{  float: Textalign}">
-          <a-button type="primary fl" class="fome_seach" >搜索</a-button>
+          <a-button type="primary" class="fome_seach fl" >搜索</a-button>
           <div class="fome_open fl" @click="seachOpen()">{{OpenCollapse?'收起':'展开'}}<a-icon :type="OpenCollapse? 'up':'down'" /></div>
         </div>
       </a-col>
@@ -100,6 +100,26 @@
             </a-col>
     </a-row>
   </div>
+  <div class="souce_Pagination">
+      <a-pagination
+        :pageSizeOptions="pageSizeOptions"
+        :total="total"
+        showSizeChanger
+        :pageSize="pageSize"
+        v-model="current"
+        size="16px"
+        showQuickJumper 
+        :defaultCurrent="2" 
+        @change="onSoucePagination" 
+        @showSizeChange="onShowSizeChange"
+      >
+      <a-pagination/>
+        <template slot='buildOptionText' slot-scope='props'>
+          <span v-if="props.value!=='50'">{{props.value}}条/页</span>
+          <span v-if="props.value==='50'">全部</span>
+        </template>
+      </a-pagination>
+    </div>
 </div>
 </template>
 
@@ -223,7 +243,12 @@
 }
 .souce_Pagination{
   float: right;
-  margin: 24px 24px 24px 24px;
+  background: #fff;
+  padding : 24px;
+  width: 100%;
+  ul{
+    float: right;
+  }
       
   }
 .source_main{
@@ -341,7 +366,21 @@ export default {
     },
     onSoucePagination(pageNumber){
        console.log('Page: ', pageNumber)
-    }
+    },
+    //请求金点子列表
+      /* goldIdeaList(parameter){
+            goldIdeaList(parameter).then((res)=>{
+                if(res.code == 0){
+                        console.log(res.result)
+                        
+                }else{
+                      this.$message.error(res.mag); 
+                       console.log("123")
+                }
+            }).catch((err)=>{
+                     console.log("123")
+            })
+      } */
   }
 }
 </script>

@@ -8,7 +8,7 @@
   
   
   /* 文字提示框样式 */
-  .ant-tooltip-inner {
+  .ant-tooltip-content .ant-tooltip-inner {
     background-color: #fff;
     color: rgba(0,0,0,0.65);
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.15);
@@ -18,6 +18,9 @@
     top: 3px;
     border-width: 0 5px 5px;
     border-bottom-color: #fff;
+}
+.ant-tooltip .ant-tooltip-content .ant-tooltip-arrow {
+   border-top-color: #fff; 
 }
 
 /* 上传封面图样式 */
@@ -108,10 +111,9 @@
 
 
 .addressbook_management .organization_structure .organization_seach .ant-input-suffix{
-  right: 25px;
+  right: 10px;
   font-size: 20px;
-  top: 35px;
-  color: rgba(0,0,0,0.25);
+  top: 16px;
 }
 
 //
@@ -166,4 +168,21 @@
 .ant-popover-content .ant-popover-inner .ant-popover-inner-content{
   width: 330px;
   padding: 15px;
+}
+
+
+.ant-modal-body{
+  overflow: hidden;
+}
+:root .select .ant-tag .anticon{
+  float: right;;
+  color: rgba(0,0,0,0.65);
+  font-size: 20px;
+  height: 28px;
+  line-height: 28px;
+}
+
+
+.ant-form-item-children span .ant-upload.ant-upload-select{
+  width: 65%;
 }

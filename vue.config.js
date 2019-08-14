@@ -93,13 +93,14 @@ module.exports = {
 
   devServer: {
     // development server port 8000
-    port: 8000
+    port: 8000,
     // proxy: {
     //   '/api': {
     //     // target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
-    //     target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro',
+    //     target: 'http://squantest.tcl.com.cn:81',
     //     ws: false,
-    //     changeOrigin: true
+    //     changeOrigin: true,
+    //     pathRewrite: { '^/api' : '' }
     //   }
     // }
   },

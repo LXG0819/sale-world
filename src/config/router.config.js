@@ -9,7 +9,7 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: '首页', hiddenHeaderConten: false },
-    redirect: '/dashboard/workplace',
+    redirect: '/list/Source-list',
     children: [
       // list
       {
@@ -92,8 +92,8 @@ export const asyncRouterMap = [
             path: '/form/pushed-list',
             name: 'pushedList',
             component: () => import('@/views/form/MessagePush/pushedList'),
-            meta: { title: '已推送', keepAlive: true, permission: [ 'form' ] }
-          }
+            meta: { title: '评论列表', keepAlive: true, permission: [ 'form' ] }
+          },
           /* {
             path: '/form/step-form',
             name: 'StepForm',
@@ -108,32 +108,47 @@ export const asyncRouterMap = [
           } */
         ]
       },
-
-      // dashboard
+      // Exammanagement
       {
-        path: '/dashboard',
-        name: 'dashboard',
-        redirect: '/dashboard/goldenIdea',
-        component: RouteView,
-        meta: { title: '金点子管理', keepAlive: true, /* icon: bxAnaalyse, */ permission: [ 'dashboard' ] },
+        path: '/Exammanagement',
+        redirect: '/Exammanagement/ExammanagementList',
+        component: PageView,
+        meta: { title: '考试管理'/* icon: 'form' */, permission: [ 'examine' ] },
         children: [
           {
-            path: '/dashboard/goldenIdea',
+            path: '/Exammanagement/ExammanagementList',
+            name: 'ExammanagementList',
+            component: () => import('@/views/Exammanagement/ExammanagementList'),
+            meta: { title: '考试列表', keepAlive: true, permission: [ 'examine' ] }
+          },
+          {
+            path: '/Exammanagement/addExammanagement',
+            name: 'addExammanagement',
+            component: () => import('@/views/Exammanagement/addExammanagement'),
+            meta: { title: '新建考试', keepAlive: true, permission: [ 'examine' ] }
+          },
+        ]
+      },
+
+      // goldenIdea
+      {
+        path: '/goldenIdea',
+        name: 'goldenIdea',
+        redirect: '/goldenIdea/goldenIdea',
+        component: RouteView,
+        meta: { title: '金点子管理', keepAlive: true, /* icon: bxAnaalyse, */ permission: [ 'goldenIdea' ] },
+        children: [
+          {
+            path: '/goldenIdea/goldenIdea',
             name: 'goldenIdea',
-            component: () => import('@/views/dashboard/goldenIdea'),
-            meta: { title: '金点子列表', keepAlive: false, permission: [ 'dashboard' ] }
-          },
-          // 外部链接
-          {
-            path: 'https://www.baidu.com/',
-            name: 'Monitor',
-            meta: { title: '监控页（外部）', target: '_blank' }
+            component: () => import('@/views/goldenIdea/goldenIdea'),
+            meta: { title: '金点子列表', keepAlive: false, permission: [ 'goldenIdea' ] }
           },
           {
-            path: '/dashboard/goldenIdeaDatails',
+            path: '/goldenIdea/goldenIdeaDatails',
             name: 'goldenIdeaDatails',
-            component: () => import('@/views/dashboard/goldenIdeaDatails'),
-            meta: { title: '金点子详情', keepAlive: true, permission: [ 'dashboard' ] }
+            component: () => import('@/views/goldenIdea/goldenIdeaDatails'),
+            meta: { title: '金点子详情', keepAlive: true, permission: [ 'goldenIdea' ] }
           }
         ]
       },
@@ -149,7 +164,7 @@ export const asyncRouterMap = [
           {
             path: '/addressbook/management',
             name: 'management',
-            component: () => import('@/views/profile/addressbook/management'),
+            component: () => import('@/views/addressbook/management'),
             meta: { title: '组织管理', permission: [ 'profile' ] }
           },
           {
@@ -161,24 +176,30 @@ export const asyncRouterMap = [
         ]
       },
 
-      // result
+      // menuManagement
       {
-        path: '/result',
-        name: 'result',
+        path: '/menuManagement',
+        name: 'menuManagement',
         component: PageView,
-        redirect: '/result/menuManagement',
+        redirect: '/menuManagement/menuManagement',
         meta: { title: '移动端菜单管理'/* , icon: 'check-circle-o' */, permission: [ 'result' ] },
         children: [
           {
-            path: '/result/menuManagement',
+            path: '/menuManagement/menuManagement',
             name: 'menuManagement',
-            component: () => import(/* webpackChunkName: "result" */ '@/views/result/menuManagement'),
+            component: () => import(/* webpackChunkName: "result" */ '@/views/menuManagement/menuManagement'),
             meta: { title: '菜单管理', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
           },
           {
-            path: '/result/addManagement',
-            name: 'ResultFail',
-            component: () => import(/* webpackChunkName: "result" */ '@/views/result/addManagement'),
+            path: '/menuManagement/addManagement',
+            name: 'addManagement',
+            component: () => import(/* webpackChunkName: "result" */ '@/views/menuManagement/addManagement'),
+            meta: { title: '新增菜单', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
+          },
+          {
+            path: '/menuManagement/editMenu',
+            name: 'addManagement',
+            component: () => import(/* webpackChunkName: "result" */ '@/views/menuManagement/editMenu'),
             meta: { title: '新增菜单', keepAlive: false, hiddenHeaderContent: true, permission: [ 'result' ] }
           }
         ]
